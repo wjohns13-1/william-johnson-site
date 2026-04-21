@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tennis Trivia — William Johnson</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f7f5f2; color: #1a1a1a; min-height: 100vh; display: flex; flex-direction: column; }
+    nav { background: #2d6a4f; padding: 13px 28px; display: flex; gap: 24px; }
+    nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.15s; }
+    nav a:hover { color: #fff; }
+    header { background: #fff; border-bottom: 2px solid #e8e2d9; padding: 36px 24px 28px; text-align: center; }
+    header h1 { font-size: 2.2rem; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; }
+    header p { color: #666; margin-top: 6px; font-size: 0.95rem; }
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px 60px; }
+    .game-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 24px rgba(0,0,0,0.08); width: 100%; max-width: 620px; overflow: hidden; }
+    .progress-bar-wrap { height: 5px; background: #f0ece6; }
+    .progress-bar-fill { height: 5px; background: #2d6a4f; transition: width 0.4s ease; width: 0%; }
+    .score-strip { display: flex; justify-content: space-between; padding: 14px 24px; background: #f7f5f2; border-bottom: 1px solid #e8e2d9; font-size: 0.85rem; color: #555; font-weight: 500; }
+    .score-strip span { color: #2d6a4f; font-weight: 700; }
+    .question-area { padding: 32px 28px 24px; }
+    .difficulty-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 14px; }
+    .badge-easy   { background: #d1fae5; color: #065f46; }
+    .badge-medium { background: #fef3c7; color: #92400e; }
+    .badge-hard   { background: #fee2e2; color: #991b1b; }
+    .question-text { font-size: 1.18rem; font-weight: 600; line-height: 1.5; color: #111; min-height: 64px; }
+    .answers { padding: 0 28px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .answer-btn { background: #f7f5f2; border: 2px solid #e0d9ce; border-radius: 10px; padding: 14px 16px; font-size: 0.93rem; font-weight: 500; color: #1a1a1a; cursor: pointer; text-align: left; transition: border-color 0.15s, background 0.15s, transform 0.1s; line-height: 1.35; }
+    .answer-btn:hover:not(:disabled) { border-color: #2d6a4f; background: #f0faf5; transform: translateY(-1px); }
+    .answer-btn:disabled { cursor: default; }
+    .answer-btn.correct { background: #d1fae5; border-color: #2d6a4f; color: #065f46; }
+    .answer-btn.wrong   { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .feedback { margin: 0 28px 20px; padding: 14px 18px; border-radius: 10px; font-size: 0.9rem; line-height: 1.5; display: none; }
+    .feedback.show { display: block; }
+    .feedback.correct-fb { background: #ecfdf5; color: #065f46; border-left: 3px solid #2d6a4f; }
+    .feedback.wrong-fb   { background: #fef2f2; color: #991b1b; border-left: 3px solid #dc2626; }
+    .next-wrap { padding: 0 28px 28px; display: none; }
+    .next-wrap.show { display: block; }
+    .next-btn { width: 100%; background: #2d6a4f; color: #fff; border: none; border-radius: 10px; padding: 14px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .next-btn:hover { background: #235c42; }
+    .results { padding: 48px 28px; text-align: center; display: none; }
+    .results.show { display: block; }
+    .results-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+    .results h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 8px; }
+    .final-score { font-size: 3rem; font-weight: 700; color: #2d6a4f; margin: 16px 0; }
+    .results p { color: #555; font-size: 0.95rem; margin-bottom: 28px; }
+    .restart-btn { background: #2d6a4f; color: #fff; border: none; border-radius: 10px; padding: 14px 36px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .restart-btn:hover { background: #235c42; }
+    .start-screen { padding: 40px 28px; text-align: center; }
+    .start-screen h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+    .start-screen p  { color: #666; font-size: 0.93rem; margin-bottom: 28px; }
+    .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .diff-btn { padding: 18px 10px; border-radius: 10px; border: 2px solid #e0d9ce; background: #f7f5f2; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: border-color 0.15s, background 0.15s; }
+    .diff-btn .diff-icon { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+    .diff-btn:hover, .diff-btn.selected { border-color: #2d6a4f; background: #f0faf5; }
+    .start-btn { width: 100%; background: #2d6a4f; color: #fff; border: none; border-radius: 10px; padding: 15px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .start-btn:hover { background: #235c42; }
+    footer { background: #1a1a1a; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 0.78rem; }
+    @media (max-width: 480px) { .answers { grid-template-columns: 1fr; } .diff-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">🏠 Home</a>
+  <a href="scratch.html">✏️ Scratch Page</a>
+  <a href="career.html">🎾 Career Page</a>
+</nav>
+
+<header>
+  <h1>🎾 Tennis Trivia</h1>
+  <p>Test your knowledge of the sport — from Grand Slams to GOAT debates.</p>
+</header>
+
+<main>
+  <div class="game-card">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+    <div class="score-strip" id="scoreStrip" style="display:none">
+      <div>Question <span id="qNum">1</span> of 10</div>
+      <div>Score: <span id="scoreDisplay">0</span></div>
+    </div>
+
+    <div class="start-screen" id="startScreen">
+      <h2>Choose Your Difficulty</h2>
+      <p>10 random questions per round — every game is different!</p>
+      <div class="diff-grid">
+        <button class="diff-btn selected" data-diff="easy" onclick="selectDiff(this)"><span class="diff-icon">🌱</span>Easy</button>
+        <button class="diff-btn" data-diff="medium" onclick="selectDiff(this)"><span class="diff-icon">⚡</span>Medium</button>
+        <button class="diff-btn" data-diff="hard" onclick="selectDiff(this)"><span class="diff-icon">🔥</span>Hard</button>
+      </div>
+      <button class="start-btn" onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="questionScreen" style="display:none">
+      <div class="question-area">
+        <div class="difficulty-badge" id="diffBadge"></div>
+        <div class="question-text" id="questionText"></div>
+      </div>
+      <div class="answers" id="answersGrid"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="next-wrap" id="nextWrap">
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+      </div>
+    </div>
+
+    <div class="results" id="resultsScreen">
+      <div class="results-emoji" id="resultsEmoji"></div>
+      <h2 id="resultsTitle"></h2>
+      <div class="final-score" id="finalScore"></div>
+      <p id="resultsMsg"></p>
+      <button class="restart-btn" onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 William Johnson · Tennis Trivia</footer>
+
+<script>
+const ALL_QUESTIONS = {
+  easy: [
+    { question: "How many Grand Slam tournaments are there in tennis?", answers: ["2","3","4","5"], correct: 2, explanation: "There are 4 Grand Slams: Australian Open, French Open, Wimbledon, and US Open." },
+    { question: "What surface is Wimbledon played on?", answers: ["Clay","Grass","Hard court","Carpet"], correct: 1, explanation: "Wimbledon is the only Grand Slam played on grass courts." },
+    { question: "What does 'love' mean in tennis scoring?", answers: ["15 points","30 points","A win","Zero points"], correct: 3, explanation: "'Love' is the tennis term for zero points." },
+    { question: "Which Grand Slam is played on clay?", answers: ["Wimbledon","US Open","French Open","Australian Open"], correct: 2, explanation: "The French Open (Roland Garros) is the only Grand Slam played on clay." },
+    { question: "How many sets does a standard men's Grand Slam match last?", answers: ["Best of 3","Best of 5","Best of 7","Best of 2"], correct: 1, explanation: "Men's Grand Slam matches are best of 5 sets." },
+    { question: "What is the term for a serve the opponent cannot touch?", answers: ["Ace","Fault","Let","Drop shot"], correct: 0, explanation: "An ace is a serve that lands in and the opponent fails to touch." },
+    { question: "Which country hosts the Australian Open?", answers: ["UK","France","USA","Australia"], correct: 3, explanation: "The Australian Open is held in Melbourne, Australia every January." },
+    { question: "What score comes after 'deuce'?", answers: ["Game","Advantage","Set point","Match point"], correct: 1, explanation: "After deuce (40-40), the next point gives one player 'advantage'." },
+    { question: "What is a 'double fault'?", answers: ["Two aces in a row","Missing both serve attempts","Hitting the net twice","Two unforced errors"], correct: 1, explanation: "A double fault occurs when a player misses both their first and second serve." },
+    { question: "Which Grand Slam is held last in the calendar year?", answers: ["French Open","Wimbledon","US Open","Australian Open"], correct: 2, explanation: "The US Open is held in August–September, the last Grand Slam of the year." },
+    { question: "What is it called when the score is 40-40?", answers: ["Tie","Deuce","Draw","Even"], correct: 1, explanation: "When both players reach 40, the score is called 'deuce'." },
+    { question: "How many players are on each side in doubles?", answers: ["1","2","3","4"], correct: 1, explanation: "Doubles tennis is played with 2 players on each side of the net." },
+    { question: "What color are tennis balls?", answers: ["White","Orange","Yellow","Green"], correct: 2, explanation: "Tennis balls are yellow-green, often called yellow." },
+    { question: "What is the net called when the serve hits it but still lands in?", answers: ["Fault","Let","Ace","Out"], correct: 1, explanation: "A 'let' is when the serve clips the net but still lands in the service box — it is replayed." },
+    { question: "Which player has won the most Grand Slam titles overall?", answers: ["Roger Federer","Rafael Nadal","Novak Djokovic","Serena Williams"], correct: 2, explanation: "Novak Djokovic holds the men's record with 24 Grand Slam titles." },
+  ],
+  medium: [
+    { question: "How many Grand Slam titles did Roger Federer win?", answers: ["17","18","19","20"], correct: 3, explanation: "Roger Federer won 20 Grand Slam singles titles before retiring in 2022." },
+    { question: "Which surface does Rafael Nadal dominate?", answers: ["Grass","Hard court","Clay","Carpet"], correct: 2, explanation: "Nadal won 14 French Opens on clay, earning him the nickname 'King of Clay'." },
+    { question: "What does 'ATP' stand for?", answers: ["American Tennis Program","Association of Tennis Professionals","Athletic Tennis Players","Australian Tennis Partnership"], correct: 1, explanation: "ATP stands for Association of Tennis Professionals." },
+    { question: "What does 'WTA' stand for?", answers: ["World Tennis Association","Women's Tennis Association","World Tennis Authority","Women's Tennis Academy"], correct: 1, explanation: "WTA stands for Women's Tennis Association." },
+    { question: "What is a 'bagel' in tennis slang?", answers: ["A 7-5 set","A 6-0 set","A tiebreak","A wild card"], correct: 1, explanation: "A 'bagel' means winning or losing a set 6-0." },
+    { question: "Which city hosts the French Open?", answers: ["Nice","Lyon","Paris","Marseille"], correct: 2, explanation: "The French Open is held at Roland Garros in Paris, France." },
+    { question: "What is a 'break' in tennis?", answers: ["A rest period","Winning a game on your opponent's serve","A tiebreak","An injury timeout"], correct: 1, explanation: "A break occurs when you win a game while your opponent is serving." },
+    { question: "Which Grand Slams are played on hard courts?", answers: ["French Open only","Wimbledon only","Australian Open and US Open","All four"], correct: 2, explanation: "Both the Australian Open and US Open are played on hard courts." },
+    { question: "How long was the longest match in Grand Slam history?", answers: ["7 hours","9 hours","11 hours","13 hours"], correct: 2, explanation: "The Isner-Mahut match at Wimbledon 2010 lasted 11 hours and 5 minutes over 3 days." },
+    { question: "What year did Serena Williams win her first Grand Slam?", answers: ["1995","1997","1999","2001"], correct: 2, explanation: "Serena Williams won her first Grand Slam at the 1999 US Open at age 17." },
+    { question: "What is a tiebreak typically played to?", answers: ["5 points","7 points","10 points","15 points"], correct: 1, explanation: "A standard tiebreak is played to 7 points, win by 2." },
+    { question: "Which player is known as the 'Swiss Maestro'?", answers: ["Stan Wawrinka","Roger Federer","Marc Rosset","Martina Hingis"], correct: 1, explanation: "Roger Federer is widely known as the 'Swiss Maestro' for his elegant playing style." },
+    { question: "What is the name of the main court at Roland Garros?", answers: ["Court Philippe-Chatrier","Court Suzanne-Lenglen","Court Arthur Ashe","Centre Court"], correct: 0, explanation: "Court Philippe-Chatrier is the main showcase court at Roland Garros." },
+    { question: "Who won the first US Open in the Open Era (1968)?", answers: ["Arthur Ashe","Rod Laver","Virginia Wade","Virginia Ruzici"], correct: 0, explanation: "Arthur Ashe won the inaugural US Open in the Open Era in 1968." },
+    { question: "What is the maximum number of points in a single game before deuce?", answers: ["3","4","5","6"], correct: 1, explanation: "A game has points 15, 30, 40, and game — 4 points if no deuce." },
+  ],
+  hard: [
+    { question: "Who holds the record for most aces in a single Grand Slam match?", answers: ["John Isner","Ivo Karlovic","Roger Federer","Andy Roddick"], correct: 0, explanation: "John Isner hit 113 aces against Nicolas Mahut at Wimbledon 2010." },
+    { question: "What is the 'tweener' shot?", answers: ["A drop shot","A between-the-legs shot","A behind-the-back shot","A jumping smash"], correct: 1, explanation: "The tweener is a between-the-legs shot hit while running away from the net." },
+    { question: "Who won the Golden Slam in 1988?", answers: ["Boris Becker","Ivan Lendl","Steffi Graf","Martina Navratilova"], correct: 2, explanation: "Steffi Graf won all 4 Grand Slams AND Olympic gold in 1988 — the only Golden Slam ever." },
+    { question: "How many times did Pete Sampras win Wimbledon?", answers: ["5","6","7","8"], correct: 2, explanation: "Pete Sampras won Wimbledon 7 times between 1993 and 2000." },
+    { question: "What year did the Open Era of tennis begin?", answers: ["1960","1964","1968","1972"], correct: 2, explanation: "The Open Era began in 1968 when Grand Slams opened to professional players." },
+    { question: "Who was the last American man to win a Grand Slam singles title?", answers: ["Pete Sampras","Andre Agassi","Andy Roddick","John Isner"], correct: 2, explanation: "Andy Roddick won the 2003 US Open — the last American man to win a Grand Slam." },
+    { question: "What does 'USPTA' stand for?", answers: ["United States Professional Tennis Association","US Players and Tennis Authority","United Sports Pro Tennis Academy","US Pro Tennis Alliance"], correct: 0, explanation: "USPTA stands for United States Professional Tennis Association." },
+    { question: "Which surface is the slowest in tennis?", answers: ["Hard court","Grass","Clay","Carpet"], correct: 2, explanation: "Clay is the slowest surface — the ball bounces higher and loses more speed." },
+    { question: "Who was the youngest Grand Slam winner in the Open Era?", answers: ["Boris Becker","Jennifer Capriati","Martina Hingis","Michael Chang"], correct: 2, explanation: "Martina Hingis won the 1997 Australian Open at 16 years and 3 months." },
+    { question: "What is 'SABR' associated with Roger Federer?", answers: ["Serve and backhand return","Sneak Attack By Roger","Short angle baseline rally","Second attempt ball return"], correct: 1, explanation: "SABR stands for 'Sneak Attack By Roger' — rushing the net to intercept a second serve." },
+    { question: "Which player spent the most weeks at world number one?", answers: ["Roger Federer","Novak Djokovic","Rafael Nadal","Pete Sampras"], correct: 1, explanation: "Novak Djokovic has spent over 400 weeks at world number one — the most in history." },
+    { question: "What is a 'golden set'?", answers: ["Winning 6-0","Winning without losing a single point","Winning in a tiebreak","Winning the first set"], correct: 1, explanation: "A golden set means winning all 24 points in a set — not losing a single point." },
+    { question: "Which man has won the most Australian Open titles?", answers: ["Roger Federer","Andre Agassi","Novak Djokovic","Roy Emerson"], correct: 2, explanation: "Novak Djokovic has won the Australian Open a record 10 times." },
+    { question: "What is the Eastern grip primarily used for?", answers: ["Serving","Forehand strokes","Backhand slices","Volleys"], correct: 1, explanation: "The Eastern forehand grip is a classic grip used for forehand groundstrokes." },
+    { question: "Who won the first Wimbledon title in the Open Era (1968)?", answers: ["Rod Laver","John Newcombe","Arthur Ashe","Ken Rosewall"], correct: 1, explanation: "John Newcombe won the first Wimbledon title in the Open Era in 1968." },
+  ]
+};
+
+let questions = [], current = 0, score = 0, difficulty = 'easy', answered = false;
+
+function selectDiff(btn) {
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  difficulty = btn.dataset.diff;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startGame() {
+  questions = shuffle(ALL_QUESTIONS[difficulty]).slice(0, 10);
+  current = 0; score = 0;
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('scoreStrip').style.display = 'flex';
+  document.getElementById('scoreDisplay').textContent = 0;
+  showQuestion();
+}
+
+function showQuestion() {
+  answered = false;
+  const q = questions[current];
+  document.getElementById('progressBar').style.width = ((current / 10) * 100) + '%';
+  document.getElementById('qNum').textContent = current + 1;
+  const badge = document.getElementById('diffBadge');
+  badge.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+  badge.className = 'difficulty-badge badge-' + difficulty;
+  document.getElementById('questionText').textContent = q.question;
+  const grid = document.getElementById('answersGrid');
+  grid.innerHTML = '';
+  q.answers.forEach((ans, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = ans;
+    btn.onclick = () => handleAnswer(i, btn);
+    grid.appendChild(btn);
+  });
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('nextWrap').classList.remove('show');
+  document.getElementById('questionScreen').style.display = 'block';
+  document.getElementById('resultsScreen').classList.remove('show');
+}
+
+function handleAnswer(index, btn) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  document.querySelectorAll('.answer-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback');
+  if (index === q.correct) {
+    score++;
+    btn.classList.add('correct');
+    fb.className = 'feedback correct-fb show';
+    fb.innerHTML = '✅ Correct! ' + q.explanation;
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.answer-btn')[q.correct].classList.add('correct');
+    fb.className = 'feedback wrong-fb show';
+    fb.innerHTML = '❌ Not quite. ' + q.explanation;
+  }
+  document.getElementById('scoreDisplay').textContent = score;
+  document.getElementById('nextWrap').classList.add('show');
+  document.getElementById('nextBtn').textContent = current + 1 < 10 ? 'Next Question →' : 'See Results →';
+}
+
+function nextQuestion() {
+  current++;
+  current < 10 ? showQuestion() : showResults();
+}
+
+function showResults() {
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('questionScreen').style.display = 'none';
+  document.getElementById('scoreStrip').style.display = 'none';
+  const pct = score / 10;
+  let emoji, title, msg;
+  if (pct === 1)       { emoji='🏆'; title='Perfect Game!';       msg='Flawless! You know your tennis inside and out.'; }
+  else if (pct >= 0.8) { emoji='🎾'; title='Ace Serve!';          msg='Outstanding — you really know the sport.'; }
+  else if (pct >= 0.6) { emoji='⚡'; title='Solid Baseline Game'; msg="Good knowledge! A little more practice and you'll be perfect."; }
+  else if (pct >= 0.4) { emoji='🎯'; title='Keep Practicing!';    msg='You got some right! Try an easier difficulty to build confidence.'; }
+  else                 { emoji='🌱'; title='Just Getting Started'; msg='Tennis is a journey! Try Easy mode and work your way up.'; }
+  document.getElementById('resultsEmoji').textContent = emoji;
+  document.getElementById('resultsTitle').textContent = title;
+  document.getElementById('finalScore').textContent = score + ' / 10';
+  document.getElementById('resultsMsg').textContent = msg;
+  document.getElementById('resultsScreen').classList.add('show');
+}
+
+function restartGame() {
+  document.getElementById('resultsScreen').classList.remove('show');
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('scoreStrip').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'block';
+  document.getElementById('questionScreen').style.display = 'none';
+}
+</script>
+</body>
+</html>
