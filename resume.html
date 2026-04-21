@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Résumé — William Johnson</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --green:      #2d6a4f;
+      --green-dark: #1b4332;
+      --green-light:#52b788;
+      --clay:       #b85c38;
+      --cream:      #faf8f3;
+      --dark:       #1a1a1a;
+      --mid:        #4a4a4a;
+      --rule:       #d0c8bc;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark);
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background-color: var(--green-dark);
+      padding: 14px 0;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: #fff !important;
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.75) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .nav-link:hover { color: #fff !important; }
+
+    /* ── Resume container ── */
+    .resume-wrap {
+      max-width: 860px;
+      margin: 48px auto 60px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+      padding: 52px 60px;
+    }
+
+    /* ── Header ── */
+    .resume-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .resume-contact {
+      font-size: 0.88rem;
+      color: var(--mid);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      margin-top: 4px;
+    }
+    .resume-contact a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    .resume-contact a:hover { text-decoration: underline; }
+
+    /* ── Section ── */
+    .resume-section {
+      margin-top: 28px;
+    }
+    .resume-section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--rule);
+    }
+
+    /* ── Entry ── */
+    .resume-entry {
+      margin-bottom: 18px;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .entry-org {
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--dark);
+    }
+    .entry-location {
+      font-size: 0.85rem;
+      color: var(--mid);
+      font-weight: 400;
+    }
+    .entry-title {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+    .entry-date {
+      font-size: 0.85rem;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+    .entry-bullets {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.88rem;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    .entry-bullets li {
+      margin-bottom: 3px;
+    }
+
+    /* ── Awards & Skills ── */
+    .skills-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.88rem;
+      color: var(--dark);
+      line-height: 1.9;
+    }
+
+    /* ── Print button ── */
+    .print-btn {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .print-btn:hover { background: var(--green-dark); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 24px 0;
+      font-size: 0.82rem;
+    }
+
+    @media print {
+      nav, .print-bar, footer { display: none !important; }
+      .resume-wrap {
+        box-shadow: none;
+        margin: 0;
+        padding: 32px 40px;
+        border-radius: 0;
+      }
+      body { background: #fff; }
+    }
+
+    @media (max-width: 600px) {
+      .resume-wrap { padding: 28px 20px; }
+      .resume-name { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">William Johnson</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        style="border-color:rgba(255,255,255,0.3);">
+        <span class="navbar-toggler-icon" style="filter:invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="career.html">Career</a></li>
+          <li class="nav-item"><a class="nav-link" href="scratch.html">Travel</a></li>
+          <li class="nav-item"><a class="nav-link" href="app.html">Tennis Trivia</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Print bar -->
+  <div class="print-bar text-center py-3" style="background:#fff; border-bottom:1px solid #e8e2d9;">
+    <button class="print-btn" onclick="window.print()">
+      <i class="bi bi-printer me-2"></i>Print / Save as PDF
+    </button>
+  </div>
+
+  <!-- Resume -->
+  <div class="container">
+    <div class="resume-wrap">
+
+      <!-- Header -->
+      <div class="resume-name">William Johnson</div>
+      <div class="resume-contact">
+        <span><i class="bi bi-envelope me-1"></i><a href="mailto:wgjmt12@gmail.com">wgjmt12@gmail.com</a></span>
+        <span><i class="bi bi-linkedin me-1"></i><a href="https://www.linkedin.com/in/will-johnson-229989353" target="_blank">linkedin.com/in/will-johnson-229989353</a></span>
+        <span><i class="bi bi-geo-alt me-1"></i>Helena, MT</span>
+      </div>
+
+      <!-- Education -->
+      <div class="resume-section">
+        <div class="resume-section-title">Education</div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Brigham Young University – Marriott School of Business</span>
+            <span class="entry-location">Provo, UT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Bachelor of Science in Entrepreneurship</span>
+            <span class="entry-date">Expected Apr 2028</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>BYU Tennis Club — active member</li>
+            <li>Valedictorian, Capital High School, Helena, MT (4.0 GPA)</li>
+            <li>Full-ride athletic scholarship offer from University of Arizona; half scholarship offer from Utah State University</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="resume-section">
+        <div class="resume-section-title">Experience</div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Cedar J Tennis</span>
+            <span class="entry-location">Helena, MT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Founder & Head Coach</span>
+            <span class="entry-date">Jun 2025 – Present</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Founded and operated independent tennis coaching and racket restringing business serving clients across Helena, MT</li>
+            <li>Designed and delivered private and group lessons for players of all ages and skill levels, growing client base through referrals</li>
+            <li>Managed all business operations including scheduling, marketing, pricing, and client communications</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Ivory Ridge Tennis Club</span>
+            <span class="entry-location">Lehi, UT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Tennis Coach</span>
+            <span class="entry-date">2025 – Present</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Deliver individual and group tennis instruction for players ranging from beginners to competitive juniors</li>
+            <li>Utilize AI-assisted tools for lesson planning and player progress tracking</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Sunpro Tennis and Pickleball</span>
+            <span class="entry-location">Springville, UT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Tennis Coach</span>
+            <span class="entry-date">2024 – 2025</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Coached players across all skill levels in tennis and pickleball, adapting instruction style to individual needs</li>
+            <li>Developed structured curriculum for junior development programs</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Last Chance Tennis Association</span>
+            <span class="entry-location">Helena, MT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Tennis Coach</span>
+            <span class="entry-date">2024</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Coached high school varsity tennis team, leading team strategy, player development, and match preparation</li>
+            <li>Mentored student athletes in both competitive performance and sportsmanship</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Cedar J Ranch</span>
+            <span class="entry-location">Helena, MT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Ranch Hand</span>
+            <span class="entry-date">Summers 2019 – 2023</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Managed daily livestock care including feeding, health monitoring, and pasture rotation across a working family ranch</li>
+            <li>Constructed and maintained fencing across varied terrain, developing strong problem-solving and physical endurance skills</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Leadership & Service -->
+      <div class="resume-section">
+        <div class="resume-section-title">Leadership & Service</div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Mouratoglou Tennis Academy</span>
+            <span class="entry-location">Sophia Antipolis, France</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Visiting Coach & Player</span>
+            <span class="entry-date">Summer 2025</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Spent one month immersed in daily training and coaching at one of the world's premier tennis academies, learning elite-level methodology</li>
+            <li>Observed and participated in professional coaching sessions, applying insights directly to Cedar J Tennis curriculum</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">The Church of Jesus Christ of Latter-day Saints</span>
+            <span class="entry-location">Comayagüela, Honduras</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Volunteer Representative</span>
+            <span class="entry-date">2023 – 2024</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Served full-time volunteer mission conducting community outreach, teaching, and service in Spanish across Honduras</li>
+            <li>Developed cross-cultural communication skills and deepened fluency in Spanish while building meaningful relationships in underserved communities</li>
+          </ul>
+        </div>
+
+        <div class="resume-entry">
+          <div class="entry-header">
+            <span class="entry-org">Capital High School</span>
+            <span class="entry-location">Helena, MT</span>
+          </div>
+          <div class="entry-header">
+            <span class="entry-title">Varsity Team Captain — Tennis & Soccer</span>
+            <span class="entry-date">2021 – 2023</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Served as team captain for varsity tennis (2 years) and varsity soccer (1 year), leading teammates in practice, competition, and character development</li>
+            <li>Began coaching junior players during summers while still a high school student, earning income and building early professional experience</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Awards, Skills & Interests -->
+      <div class="resume-section">
+        <div class="resume-section-title">Awards, Skills & Interests</div>
+        <ul class="skills-list">
+          <li><strong>Languages:</strong> English (native), Spanish (fluent — conversational, professional, and mission-level proficiency)</li>
+          <li><em>USPTA Certified Tennis Professional</em> — working toward Level 3 certification</li>
+          <li>Proficient in AI tools for lesson planning, scheduling, and business operations</li>
+          <li>Racket restringing — professional-level equipment service for competitive players</li>
+          <li><em>Valedictorian</em>, Capital High School, Helena, MT</li>
+          <li>Travel: 47 U.S. states and 12 countries across Europe and Central America</li>
+          <li>Co-founder of early-stage food product venture (buttermilk syrup) in collaboration with family</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p class="mb-0">© 2026 William Johnson &nbsp;·&nbsp; <a href="index.html" style="color:rgba(255,255,255,0.5);">Back to Home</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
