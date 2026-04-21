@@ -1,0 +1,385 @@
+/* =============================================
+   scratch.css — William Johnson Travel Page
+   Custom stylesheet (no Bootstrap)
+   ============================================= */
+
+/* ── CSS Variables ── */
+:root {
+  --brown:      #5c3d2e;
+  --tan:        #c9a87c;
+  --cream:      #f5f0e8;
+  --dark:       #1e1a16;
+  --green:      #4a7c59;
+  --rust:       #b85c38;
+  --light-tan:  #ede0cc;
+  --white:      #ffffff;
+  --shadow:     rgba(0,0,0,0.18);
+}
+
+/* ── Reset & Base ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  background-color: var(--cream);
+  color: var(--dark);
+  line-height: 1.75;
+}
+
+/* ── Font color definitions ── */
+h1, h2, h3 {
+  font-family: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  color: var(--brown);
+  letter-spacing: 0.06em;
+}
+
+p {
+  font-family: 'Lora', Georgia, serif;
+  color: var(--dark);
+  font-size: 1rem;
+}
+
+a {
+  color: var(--rust);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--brown);
+  text-decoration: underline;
+}
+
+/* ── Navigation ── */
+#topnav {
+  background-color: var(--brown);
+  padding: 14px 40px;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+#topnav a {
+  color: var(--light-tan);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+#topnav a:hover {
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* ── Hero div ── */
+#hero {
+  background-color: var(--dark);
+  background-image: url('travel-grindelwald.jpeg');
+  background-size: cover;
+  background-position: center 30%;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 14, 8, 0.58);
+}
+
+#hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  padding: 40px 24px;
+}
+
+#hero-content h1 {
+  font-size: 5rem;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 18px;
+  text-shadow: 2px 4px 12px rgba(0,0,0,0.5);
+}
+
+#hero-content p {
+  font-size: 1.2rem;
+  color: var(--light-tan);
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+.hero-btn {
+  display: inline-block;
+  background-color: var(--rust);
+  color: var(--white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  padding: 12px 32px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.hero-btn:hover {
+  background-color: var(--tan);
+  color: var(--dark);
+  text-decoration: none;
+}
+
+/* ── Stat bar ── */
+#stat-bar {
+  background-color: var(--brown);
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 30px 20px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  color: var(--tan);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--light-tan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Main content sections ── */
+#why-travel {
+  max-width: 860px;
+  margin: 70px auto;
+  padding: 0 28px;
+}
+
+#why-travel h2 {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+}
+
+.section-rule {
+  width: 56px;
+  height: 3px;
+  background: var(--rust);
+  border-radius: 2px;
+  margin: 10px 0 24px;
+}
+
+/* ── Benefits list ── */
+#benefits {
+  background-color: var(--light-tan);
+  padding: 70px 28px;
+}
+
+#benefits-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+#benefits h2 {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+}
+
+/* Ordered list with embedded unordered lists */
+ol.benefit-list {
+  margin-top: 24px;
+  padding-left: 22px;
+  font-family: 'Lora', Georgia, serif;
+}
+
+ol.benefit-list > li {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--brown);
+  margin-bottom: 16px;
+}
+
+ol.benefit-list > li > ul {
+  margin-top: 8px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+ol.benefit-list > li > ul > li {
+  font-weight: normal;
+  color: var(--dark);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+/* ── Photo gallery div ── */
+#gallery {
+  padding: 70px 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#gallery h2 {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.photo-grid figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px var(--shadow);
+  position: relative;
+}
+
+.photo-grid figure img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.photo-grid figure:hover img {
+  transform: scale(1.05);
+}
+
+.photo-grid figcaption {
+  background: rgba(30,26,22,0.82);
+  color: var(--light-tan);
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+  padding: 8px 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-family: 'Lora', Georgia, serif;
+}
+
+/* ── YouTube section ── */
+#video-section {
+  background-color: var(--dark);
+  padding: 70px 28px;
+  text-align: center;
+}
+
+#video-section h2 {
+  font-size: 2.8rem;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+#video-section p {
+  color: var(--light-tan);
+  font-style: italic;
+  margin-bottom: 28px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.video-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ── Tableau section ── */
+#tableau-section {
+  padding: 70px 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#tableau-section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+}
+
+#tableau-section p {
+  margin-bottom: 28px;
+  font-style: italic;
+  color: var(--brown);
+}
+
+/* ── Spanish section ── */
+#spanish-section {
+  background-color: var(--green);
+  padding: 60px 28px;
+  text-align: center;
+}
+
+#spanish-section h2 {
+  color: var(--cream);
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+#spanish-section p {
+  color: var(--light-tan);
+  max-width: 680px;
+  margin: 0 auto;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+/* ── Footer ── */
+#footer {
+  background-color: var(--dark);
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 0.82rem;
+  font-family: 'Lora', Georgia, serif;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  #hero-content h1 { font-size: 3rem; }
+  #stat-bar { gap: 30px; }
+  .photo-grid { grid-template-columns: 1fr; }
+}
