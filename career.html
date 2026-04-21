@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>William Johnson — Career & Expertise</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --green:  #2d6a4f;
+      --green-light: #52b788;
+      --clay:   #c1440e;
+      --cream:  #faf8f3;
+      --dark:   #1a1a1a;
+      --mid:    #4a4a4a;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark);
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--green) 0%, #1b4332 100%);
+      color: #fff;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .hero-photo {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 50%;
+      border: 5px solid var(--green-light);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .hero-name {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.85;
+      letter-spacing: 0.04em;
+    }
+    .badge-cert {
+      background: var(--green-light);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+    .divider-green {
+      width: 48px;
+      height: 3px;
+      background: var(--green-light);
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── CAREER PATH ── */
+    .career-section {
+      background: #fff;
+      padding: 80px 0;
+    }
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--green-light), var(--clay));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.2rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -34px; top: 4px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--green-light);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--green-light);
+    }
+    .timeline-item:last-child::before {
+      background: var(--clay);
+      box-shadow: 0 0 0 2px var(--clay);
+    }
+    .timeline-step {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2px;
+    }
+    .timeline-item h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .timeline-item p {
+      font-size: 0.92rem;
+      color: var(--mid);
+      margin: 0;
+    }
+
+    /* ── EXPERIENCE ── */
+    .experience-section {
+      background: var(--cream);
+      padding: 80px 0;
+    }
+    .exp-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 28px 22px;
+      height: 100%;
+      border-top: 3px solid var(--green-light);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .exp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+    .exp-icon {
+      font-size: 1.6rem;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .exp-card h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .exp-card p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      margin: 0;
+    }
+    .exp-card .exp-date {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 8px;
+    }
+
+    /* ── HIGHLIGHT STAT STRIP ── */
+    .stat-strip {
+      background: linear-gradient(90deg, var(--green) 0%, #1b4332 100%);
+      color: #fff;
+      padding: 50px 0;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      opacity: 0.75;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* ── CONTRIBUTIONS ── */
+    .contributions-section {
+      background: #fff;
+      padding: 80px 0;
+    }
+    .contrib-card {
+      border-left: 3px solid var(--clay);
+      padding: 18px 24px;
+      background: var(--cream);
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 18px;
+    }
+    .contrib-card h6 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .contrib-card p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      margin: 0;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      background: #1b4332;
+      padding: 14px 0;
+    }
+    .topnav a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-right: 24px;
+      transition: color 0.15s;
+    }
+    .topnav a:hover { color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 30px 0;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 576px) {
+      .hero-name { font-size: 2.1rem; }
+      .hero-photo { width: 160px; height: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="container">
+      <a href="index.html"><i class="bi bi-house me-1"></i>Home</a>
+      <a href="resume.html"><i class="bi bi-file-person me-1"></i>Résumé</a>
+      <a href="scratch.html"><i class="bi bi-code-slash me-1"></i>Scratch Page</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-md-auto text-center text-md-start">
+          <img src="william-johnson.jpeg" alt="William Johnson holding a tennis racket" class="hero-photo"/>
+        </div>
+        <div class="col-md">
+          <p class="section-label" style="color: var(--green-light);">Graduate Career Page</p>
+          <h1 class="hero-name">William Johnson</h1>
+          <p class="hero-sub">USPTA Certified Tennis Coach &nbsp;·&nbsp; Entrepreneurship Student at BYU</p>
+          <span class="badge-cert"><i class="bi bi-award me-1"></i>USPTA Certified · Working toward Level 3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stat Strip -->
+  <div class="stat-strip">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Years Coaching</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Tennis Clubs Worked At</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-number">3–80+</div>
+          <div class="stat-label">Ages Coached</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Business Founded</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Career Path -->
+  <section class="career-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <p class="section-label">Where I'm Headed</p>
+          <h2 class="section-title">Projected Career Path</h2>
+          <div class="divider-green"></div>
+          <p style="color: var(--mid); font-size: 0.95rem; line-height: 1.8;">
+            My path sits at the intersection of sport and business. I want to build ventures that matter — not just profitable ones — and eventually shape the way tennis is taught, accessed, and experienced around the world.
+          </p>
+        </div>
+        <div class="col-lg-6 offset-lg-1">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-step">Now → Near Term</div>
+              <h5>Grow Cedar J Tennis & Complete BYU Entrepreneurship Degree</h5>
+              <p>Expand my private coaching and racket restringing business while building entrepreneurial skills at BYU. Pursue USPTA Level 3 certification.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-step">Mid Term</div>
+              <h5>Launch Multiple Ventures</h5>
+              <p>Scale Cedar J Tennis, continue developing the buttermilk syrup product with my sister, and pursue additional entrepreneurial opportunities that align with my passions.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-step">Long Term</div>
+              <h5>Collegiate Coach or Tennis Academy Founder</h5>
+              <p>Coach at the collegiate level or build a world-class tennis academy — inspired by my time at the Mouratoglou Academy in France — making elite-level coaching accessible to all.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-step">Vision</div>
+              <h5>Tennis for Everyone</h5>
+              <p>Make tennis genuinely accessible in underserved and impoverished communities through purpose-driven business models and nonprofit partnerships.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="experience-section">
+    <div class="container">
+      <p class="section-label">What I've Done</p>
+      <h2 class="section-title">Experience to Date</h2>
+      <div class="divider-green"></div>
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="bi bi-trophy"></i></div>
+            <div class="exp-date">2021 – Present</div>
+            <h5>Tennis Coaching Career</h5>
+            <p>Started coaching young players during high school summers, then returned from an LDS mission in 2024 to coach a high school varsity team. Has since worked at Last Chance Tennis (Helena, MT), Sunpro Tennis & Pickleball (Springville, UT), and Ivory Ridge (Lehi, UT).</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="bi bi-award"></i></div>
+            <div class="exp-date">Summer 2024</div>
+            <h5>USPTA Certification</h5>
+            <p>Earned USPTA certification, validating professional coaching standards. Currently working toward a Level 3 certification — the highest designation in the USPTA system.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="bi bi-globe-europe-africa"></i></div>
+            <div class="exp-date">Summer 2025</div>
+            <h5>Mouratoglou Academy — France</h5>
+            <p>Spent a month living and training at the prestigious Mouratoglou Tennis Academy in France — one of the world's premier coaching institutions. Immersed in elite-level methodology and culture daily.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="bi bi-briefcase"></i></div>
+            <div class="exp-date">2025 – Present</div>
+            <h5>Cedar J Tennis — Founder</h5>
+            <p>Founded my own coaching and racket restringing business upon returning from France. Offered private and group lessons in Helena, MT. Still actively running the racket restringing arm of the business.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="bi bi-people"></i></div>
+            <div class="exp-date">Ongoing</div>
+            <h5>Coaching All Ages</h5>
+            <p>Has coached players ranging from 3–4 year olds in their first introduction to the sport, all the way to adults 80 years and older. Skilled at adapting instruction style to any age, level, or learning style.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="bi bi-basket"></i></div>
+            <div class="exp-date">In Progress</div>
+            <h5>Buttermilk Syrup Venture</h5>
+            <p>Collaborating with his sister to develop and bring a buttermilk syrup product to market — an early example of entrepreneurial initiative outside the tennis world.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contributions -->
+  <section class="contributions-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <p class="section-label">What I Bring</p>
+          <h2 class="section-title">Anticipated Contributions</h2>
+          <div class="divider-green"></div>
+          <p style="color: var(--mid); font-size: 0.95rem; line-height: 1.8;">
+            I came into tennis later than most — picking it up seriously in high school — which gives me a unique empathy for players who are starting from scratch. That perspective drives everything I want to build.
+          </p>
+        </div>
+        <div class="col-lg-6 offset-lg-1">
+          <div class="contrib-card">
+            <h6><i class="bi bi-heart me-2" style="color:var(--clay)"></i>Tennis for Underserved Communities</h6>
+            <p>Tennis is often seen as a sport for the privileged. I want to change that — building accessible programs, affordable coaching models, and community-first academies that open the sport to people who've never had a chance to pick up a racket.</p>
+          </div>
+          <div class="contrib-card">
+            <h6><i class="bi bi-robot me-2" style="color:var(--clay)"></i>AI-Enhanced Coaching</h6>
+            <p>I've become well-versed in using AI for scheduling, lesson planning, and player development. I believe coaching businesses that embrace technology will deliver better outcomes — and I intend to lead that charge.</p>
+          </div>
+          <div class="contrib-card">
+            <h6><i class="bi bi-lightbulb me-2" style="color:var(--clay)"></i>Creative Ideation & Entrepreneurship</h6>
+            <p>I have a strong imagination and genuinely love creating new things. That creativity, paired with a business education from BYU, means I'll consistently bring fresh ideas — whether to the court, to a startup, or to a community.</p>
+          </div>
+          <div class="contrib-card">
+            <h6><i class="bi bi-globe me-2" style="color:var(--clay)"></i>World-Class Academy Model</h6>
+            <p>Inspired by my time at Mouratoglou, I hope to one day build a tennis academy that rivals the best in the world — one that emphasizes character development alongside athletic excellence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="mb-0">© 2026 William Johnson &nbsp;·&nbsp; BYU Entrepreneurship &nbsp;·&nbsp; USPTA Certified Coach</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
